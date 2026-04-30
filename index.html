@@ -45,135 +45,35 @@
 </head>
 <body>
 
-<div class="app-card">
-    <div class="lang-bar">
-        <div class="lang-btn active" onclick="setLang('en', this)">English</div>
-        <div class="lang-btn" onclick="setLang('hi', this)">हिन्दी</div>
-    </div>
-
-    <div class="header">
-        <h2 id="headTitle">✈️ HAMZA TRAVELS</h2>
-        <p id="headSub" style="margin:5px 0 0; font-size:12px; opacity:0.9;">Premium Booking Service</p>
-    </div>
-
-    <div class="form-body">
-        <h3 id="selectTitle">Choose Airline / फ़्लाइट चुनें</h3>
-        
         <div class="airline-grid">
             <div class="airline-item">
                 <input type="radio" name="airline" value="Air India" id="ai" checked>
                 <label class="airline-label" for="ai">
-                    <img src="https://img.icons8.com/color/96/air-india.png" alt="AI">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Air_India_Logo.svg" alt="AI">
                     <span>Air India</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="Saudi Airlines" id="sa">
                 <label class="airline-label" for="sa">
-                    <img src="https://img.icons8.com/color/96/saudi-arabia-flag.png" alt="SA">
+                    <img src="https://www.saudia.com/content/dam/saudia/Global/Images/Logos/saudia-logo-gold.svg" alt="SA">
                     <span>Saudi Air</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="IndiGo" id="ig">
                 <label class="airline-label" for="ig">
-                    <img src="https://img.icons8.com/fluent/96/airplane-take-off.png" alt="IG">
+                    <img src="https://www.goindigo.in/content/dam/indigov2/6e-website/header/indigo-logo.png" alt="IG">
                     <span>IndiGo</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="Oman Air" id="oa">
                 <label class="airline-label" for="oa">
-                    <img src="https://img.icons8.com/color/96/oman-flag.png" alt="OA">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Oman_Air_logo.svg/1024px-Oman_Air_logo.svg.png" alt="OA">
                     <span>Oman Air</span>
                 </label>
             </div>
         </div>
-
-        <div class="input-row">
-            <div class="field">
-                <label id="lblFrom">From</label>
-                <input type="text" id="from" placeholder="City">
-            </div>
-            <div class="field">
-                <label id="lblTo">To</label>
-                <input type="text" id="to" placeholder="City">
-            </div>
-        </div>
-
-        <div class="input-row">
-            <div class="field">
-                <label id="lblDate">Date</label>
-                <input type="date" id="date">
-            </div>
-            <div class="field">
-                <label id="lblBudget">Budget</label>
-                <input type="number" id="budget" placeholder="₹">
-            </div>
-        </div>
-
-        <div class="field" style="margin-bottom: 20px;">
-            <label id="lblName">Passenger Name</label>
-            <input type="text" id="name" placeholder="Full Name">
-        </div>
-
-        <button onclick="sendWhatsApp()" class="btn-wa" id="btnWa">💬 Send Inquiry</button>
-        <a href="https://shohrabshaikh1992.github.io/Payment-/" class="btn-pay" id="btnPay">💳 Proceed to Payment</a>
-    </div>
-</div>
-
-<script>
-    function setLang(lang, btn) {
-        // Update Buttons
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Text Content
-        const texts = {
-            en: {
-                head: "✈️ HAMZA TRAVELS", sub: "Premium Booking Service", select: "Choose Airline",
-                from: "From", to: "To", date: "Date", budget: "Budget", name: "Passenger Name",
-                wa: "💬 Send Inquiry", pay: "💳 Proceed to Payment"
-            },
-            hi: {
-                head: "✈️ हमज़ा ट्रैवल्स", sub: "प्रीमियम बुकिंग सेवा", select: "फ़्लाइट चुनें",
-                from: "कहाँ से", to: "कहाँ तक", date: "तारीख", budget: "बजट", name: "यात्री का नाम",
-                wa: "💬 जानकारी भेजें", pay: "💳 पेमेंट करें"
-            }
-        };
-
-        document.getElementById('headTitle').innerText = texts[lang].head;
-        document.getElementById('headSub').innerText = texts[lang].sub;
-        document.getElementById('selectTitle').innerText = texts[lang].select;
-        document.getElementById('lblFrom').innerText = texts[lang].from;
-        document.getElementById('lblTo').innerText = texts[lang].to;
-        document.getElementById('lblDate').innerText = texts[lang].date;
-        document.getElementById('lblBudget').innerText = texts[lang].budget;
-        document.getElementById('lblName').innerText = texts[lang].name;
-        document.getElementById('btnWa').innerText = texts[lang].wa;
-        document.getElementById('btnPay').innerText = texts[lang].pay;
-    }
-
-    function sendWhatsApp() {
-        var airline = document.querySelector('input[name="airline"]:checked').value;
-        var from = document.getElementById('from').value;
-        var to = document.getElementById('to').value;
-        var date = document.getElementById('date').value;
-        var budget = document.getElementById('budget').value;
-        var name = document.getElementById('name').value;
-        var phoneNumber = "919519266964"; 
-        
-        if(from == "" || to == "" || name == "") { alert("Details bhariye!"); return; }
-
-        var message = "*✈️ HAMZA TRAVELS - ENQUIRY*%0A" + 
-                      "*Airline:* " + airline + "%0A" +
-                      "*Name:* " + name + "%0A" +
-                      "*Route:* " + from + " to " + to + "%0A" + 
-                      "*Budget:* ₹" + budget + "%0A" +
-                      "Bhai, availability check karke batana.";
-        window.open("https://wa.me/" + phoneNumber + "?text=" + message, '_blank');
-    }
-</script>
-
-</body>
-</html>
+    
+    
