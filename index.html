@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza Creation - Secure Payment</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>Hamza Creation - Payment</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 350px; }
-        .qr-container { background: #fff; padding: 15px; border: 2px dashed #1a73e8; border-radius: 15px; margin: 20px 0; display: flex; flex-direction: column; align-items: center; }
-        #qrcode img { margin: auto; border-radius: 10px; border: 5px solid white; }
-        .pay-btn { display: block; background: #28a745; color: white; text-decoration: none; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 18px; margin-top: 15px; box-shadow: 0 4px 12px rgba(40,167,69,0.2); }
-        .dl-btn { display: inline-block; margin-top: 15px; color: #1a73e8; font-weight: bold; text-decoration: none; font-size: 13px; border: 1px solid #1a73e8; padding: 8px 15px; border-radius: 20px; background: none; cursor: pointer; }
-        .tip { background: #fff9c4; padding: 10px; border-radius: 8px; font-size: 12px; color: #856404; margin-top: 15px; text-align: left; border-left: 4px solid #fbc02d; }
+        body { font-family: sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 320px; }
+        .qr-img { width: 100%; border-radius: 12px; border: 2px solid #eee; margin: 15px 0; display: block; }
+        .pay-btn { display: block; background: #28a745; color: white; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -20,12 +16,16 @@
 <div class="card">
     <h2 style="color: #1a73e8; margin: 0;">Hamza Creation</h2>
     
-    <img src="1000099726.jpg" alt="Merchant QR" class="qr-img">
+    <img src="qr.jpg.jpg" alt="Merchant QR" class="qr-img">
     
     <p style="font-size: 12px; font-weight: bold;">SCAN QR TO PAY</p>
 
     <a href="upi://pay?pa=Shohrab.shaikh1@ibl&cu=INR" class="pay-btn">🚀 PAY VIA UPI APP</a>
 </div>
+
+</body>
+</html>
+
     
 
 
