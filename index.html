@@ -3,30 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza Creation - Payment</title>
+    <title>Hamza Travels - Flight Booking</title>
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 320px; }
-        .qr-img { width: 100%; border-radius: 12px; border: 2px solid #eee; margin: 15px 0; display: block; }
-        .pay-btn { display: block; background: #28a745; color: white; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 10px; }
+        :root { --primary: #1a73e8; --secondary: #25D366; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        .app-card { max-width: 480px; background: white; margin: 10px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .header { background: var(--primary); padding: 20px; text-align: center; color: white; }
+        .form-body { padding: 20px; }
+        h3 { font-size: 16px; color: var(--primary); margin-bottom: 15px; text-align: center; }
+
+        /* Airline Cards - Logo Style */
+        .airline-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .airline-item { position: relative; text-align: center; }
+        .airline-item input { position: absolute; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
+        .airline-label { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 15px 5px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; transition: 0.3s;
+        }
+        .airline-label img { width: 60px; height: 35px; object-fit: contain; margin-bottom: 8px; }
+        .airline-label span { font-size: 12px; font-weight: bold; color: #333; }
+        
+        .airline-item input:checked + .airline-label { border-color: var(--primary); background: #e8f0fe; }
+
+        .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .field { flex: 1; }
+        label { display: block; font-size: 12px; font-weight: 600; color: #666; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; outline: none; }
+
+        .btn-wa { display: block; width: 100%; border: none; background: var(--secondary); color: white; text-align: center; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; text-decoration: none; }
+        
+        /* QR Section */
+        .qr-section { display: none; text-align: center; padding: 20px; border-top: 2px dashed #eee; margin-top: 20px; animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .qr-section img { width: 200px; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 10px; }
+        .btn-pay-toggle { display: block; background: #fff; color: var(--primary); text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 10px; border: 1px solid var(--primary); cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2 style="color: #1a73e8; margin: 0;">Hamza Creation</h2>
-    
-    <img src="qr.jpg.jpg" alt="Merchant QR" class="qr-img">
-    
-    <p style="font-size: 12px; font-weight: bold;">SCAN QR TO PAY</p>
+<div class="app-card">
+    <div class="header">
+        <h2>✈️ HAMZA TRAVELS</h2>
+        <p style="margin:5px 0 0; font-size:12px;">Premium Booking Service</p>
+    </div>
 
-    <a href="upi://pay?pa=Shohrab.shaikh1@ibl&cu=INR" class="pay-btn">🚀 PAY VIA UPI APP</a>
+    <div class="form-body">
+        <h3>फ़्लाइट चुनें (Select Airline)</h3>
+        <div class="airline-grid">
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Air India" id="ai" checked>
+                <label class="airline-label" for="ai">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Air_India_Logo.svg" alt="AI">
+                    <span>Air India</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Saudi Airlines" id="sa">
+                <label class="airline-label" for="sa">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Saudia_Logo.svg/1200px-Saudia_Logo.svg.png" alt="SA">
+                    <span>Saudi Air</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="IndiGo" id="ig">
+                <label class="airline-label" for="ig">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/IndiGo_logo.svg" alt="IG">
+                    <span>IndiGo</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Oman Air" id="oa">
+                <label class="airline-label" for="oa">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Oman_Air_logo.svg/1200px-Oman_Air_logo.svg.png" alt="OA">
+                    <span>Oman Air</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="field"><label>From</label><input type="text" id="from" placeholder="Source"></div>
+            <div class="field"><label>To</label><input type="text" id="to" placeholder="Destination"></div>
+        </div>
+
+        <div class="field" style="margin-bottom:15px;"><label>Passenger Name</label><input type="text" id="name" placeholder="Full Name"></div>
+
+        <button onclick="sendWhatsApp()" class="btn-wa">💬 Send Inquiry on WhatsApp</button>
+        
+        <button onclick="document.getElementById('qrArea').style.display='block'" class="btn-pay-toggle">💳 Show Payment QR Code</button>
+
+        <div id="qrArea" class="qr-section">
+            <p style="font-weight:bold; color:#333;">Scan to Pay / भुगतान करें</p>
+            <img src="https://raw.githubusercontent.com/shohrabshaikh1992/Payment-/main/1000095904.jpg" alt="QR Code">
+            <p style="font-size:12px; color:red; margin-top:10px;">Note: Payment ke baad screenshot WhatsApp karein.</p>
+        </div>
+    </div>
 </div>
+
+<script>
+    function sendWhatsApp() {
+        var airline = document.querySelector('input[name="airline"]:checked').value;
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+        var name = document.getElementById('name').value;
+        var phoneNumber = "919519266964"; 
+        
+        if(from == "" || to == "" || name == "") { alert("Details bhariye!"); return; }
+
+        var message = "*✈️ HAMZA TRAVELS - NEW ENQUIRY*%0A" + 
+                      "*Airline:* " + airline + "%0A" +
+                      "*Name:* " + name + "%0A" +
+                      "*Route:* " + from + " to " + to + "%0A" + 
+                      "Bhai, availability check karke batana.";
+        window.open("https://wa.me/" + phoneNumber + "?text=" + message, '_blank');
+    }
+</script>
 
 </body>
 </html>
-
-    
-
-
-
