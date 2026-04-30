@@ -31,24 +31,8 @@
         <strong>Help:</strong> Agar button fail ho, toh QR save karke PhonePe/GPay ki <b>Gallery</b> se scan karein.
     </div>
 
-    <a href="upi://pay?pa=Shohrab1992@airtel&pn=Shohrab&cu=INR" class="pay-btn">🚀 PAY VIA UPI APP</a>
-
-    <p style="font-size: 10px; color: #999; margin-top: 20px;">100% Safe & Secure</p>
-</div>
-
-<script>
-    // BharatPe UPI String
-    var upiData = "upi://pay?pa=BHARATPE2C0R0F1H5I75911@unitype&pn=Hamza%20Creation&cu=INR";
+    <a href="upi://pay?pa=Shohrab1992@airtel&cu=INR" class="pay-btn">🚀 PAY VIA UPI APP</a>
     
-    // QR Generate karne ka function
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: upiData,
-        width: 200,
-        height: 200,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
 
     // Download karne ka function
     function downloadQR() {
