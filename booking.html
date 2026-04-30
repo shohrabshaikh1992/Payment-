@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza Travels - Flight Booking</title>
+    <title>Hamza Travels - Premium Booking</title>
     <style>
-        :root { --primary: #1a73e8; --secondary: #25D366; --bg: #f4f7f9; }
+        :root { --primary: #1a73e8; --secondary: #25D366; --bg: #f8f9fa; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .app-card { max-width: 450px; background: white; margin: 10px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .app-card { max-width: 480px; background: white; margin: 10px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        
         .header { background: var(--primary); padding: 20px; text-align: center; color: white; }
-        .header h2 { margin: 0; font-size: 22px; text-transform: uppercase; }
-        
+        .header h2 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+
         .form-body { padding: 20px; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: 600; color: #444; font-size: 13px; }
-        label span { color: var(--primary); font-size: 11px; }
-        
-        input, select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 15px; background: #fafafa; }
-        input:focus, select:focus { border-color: var(--primary); outline: none; background: #fff; }
+        h3 { font-size: 16px; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 
-        .row { display: flex; gap: 10px; }
-        .row div { flex: 1; }
-
-        .btn-wa { display: block; width: 100%; border: none; background: var(--secondary); color: white; text-align: center; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; text-decoration: none; }
-        .btn-pay { display: block; background: #fff; color: var(--primary); text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 10px; border: 2px solid var(--primary); }
+        /* Airline Cards Styling */
+        .airline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+        .airline-item { position: relative; text-align: center; }
+        .airline-item input { position: absolute; opacity: 0; cursor: pointer; }
+        .airline-label { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 10px 5px; border: 1px solid #ddd; border-radius: 12px; cursor: pointer; transition: 0.3s; height: 90px;
+        }
+        .airline-label img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px; }
+        .airline-label span { font-size: 10px; font-weight: bold; color: #555; }
         
-        .footer-text { text-align: center; font-size: 11px; color: #999; margin-top: 15px; }
+        /* Selection Effect */
+        .airline-item input:checked + .airline-label { border-color: var(--primary); background: #e8f0fe; box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2); }
+        .airline-item input:checked + .airline-label::after { content: '✓'; position: absolute; bottom: 5px; right: 5px; background: var(--primary); color: white; border-radius: 50%; width: 15px; height: 15px; font-size: 10px; line-height: 15px; }
+
+        /* Input Fields */
+        .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .field { flex: 1; }
+        label { display: block; font-size: 12px; font-weight: 600; color: #666; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; background: #fff; outline: none; }
+        input:focus { border-color: var(--primary); }
+
+        /* Buttons */
+        .btn-wa { display: block; width: 100%; border: none; background: var(--secondary); color: white; text-align: center; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; text-decoration: none; }
+        .btn-pay { display: block; background: #fff; color: var(--primary); text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 10px; border: 1px solid var(--primary); }
     </style>
 </head>
 <body>
@@ -33,80 +47,100 @@
 <div class="app-card">
     <div class="header">
         <h2>✈️ HAMZA TRAVELS</h2>
-        <p style="margin:5px 0 0; font-size:12px;">Easy Booking / आसान बुकिंग</p>
+        <p style="margin:5px 0 0; font-size:12px; opacity:0.9;">Easy Booking / आसान बुकिंग</p>
     </div>
 
     <div class="form-body">
-        <div class="input-group">
-            <label>Select Airline <span>(एयरलाइन चुनें)</span></label>
-            <select id="airline">
-                <option value="Air India">1. Air India</option>
-                <option value="Saudi Airlines">2. Saudi Airlines</option>
-                <option value="IndiGo">3. IndiGo</option>
-                <option value="Oman Air">4. Oman Air</option>
-            </select>
+        <h3>✈️ फ़्लाइट चुनें (Select Airline)</h3>
+        
+        <div class="airline-grid">
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Air India" id="ai" checked>
+                <label class="airline-label" for="ai">
+                    <img src="https://img.icons8.com/color/96/air-india.png" alt="AI">
+                    <span>Air India</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Saudi Airlines" id="sa">
+                <label class="airline-label" for="sa">
+                    <img src="https://img.icons8.com/color/96/saudi-arabia-flag.png" alt="SA">
+                    <span>Saudi Air</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="IndiGo" id="ig">
+                <label class="airline-label" for="ig">
+                    <img src="https://www.goindigo.in/content/dam/indigov2/6e-website/header/indigo-logo.png" style="width: 100%; height: auto;" alt="IG">
+                    <span>IndiGo</span>
+                </label>
+            </div>
+            <div class="airline-item">
+                <input type="radio" name="airline" value="Oman Air" id="oa">
+                <label class="airline-label" for="oa">
+                    <img src="https://img.icons8.com/color/96/oman-flag.png" alt="OA">
+                    <span>Oman Air</span>
+                </label>
+            </div>
         </div>
 
-        <div class="row">
-            <div class="input-group">
-                <label>From <span>(कहाँ से)</span></label>
+        <div class="input-row">
+            <div class="field">
+                <label>From (कहाँ से)</label>
                 <input type="text" id="from" placeholder="Source">
             </div>
-            <div class="input-group">
-                <label>To <span>(कहाँ तक)</span></label>
+            <div class="field">
+                <label>To (कहाँ तक)</label>
                 <input type="text" id="to" placeholder="Destination">
             </div>
         </div>
 
-        <div class="row">
-            <div class="input-group">
-                <label>Travel Date <span>(तारीख)</span></label>
+        <div class="input-row">
+            <div class="field">
+                <label>Date (तारीख)</label>
                 <input type="date" id="date">
             </div>
-            <div class="input-group">
-                <label>Budget <span>(बजट)</span></label>
+            <div class="field">
+                <label>Budget (बजट)</label>
                 <input type="number" id="budget" placeholder="₹">
             </div>
         </div>
 
-        <div class="input-group">
-            <label>Passenger Name <span>(नाम)</span></label>
+        <div class="field" style="margin-bottom: 20px;">
+            <label>Passenger Name (नाम)</label>
             <input type="text" id="name" placeholder="Full Name">
         </div>
 
         <button onclick="sendWhatsApp()" class="btn-wa">💬 Send Inquiry on WhatsApp</button>
-        
         <a href="https://shohrabshaikh1992.github.io/Payment-/" class="btn-pay">💳 Proceed to Payment</a>
-        
-        <p class="footer-text">24/7 Customer Support available</p>
     </div>
 </div>
 
 <script>
     function sendWhatsApp() {
-        var airline = document.getElementById('airline').value;
+        var airline = document.querySelector('input[name="airline"]:checked').value;
         var from = document.getElementById('from').value;
         var to = document.getElementById('to').value;
         var date = document.getElementById('date').value;
         var budget = document.getElementById('budget').value;
         var name = document.getElementById('name').value;
         
-        var phoneNumber = "919004144145"; // Confirm your number here
+        var phoneNumber = "919519266964"; 
         
         if(from == "" || to == "" || name == "") {
-            alert("Please fill all details!");
+            alert("Kripya details bharein!");
             return;
         }
 
-        var message = "*✈️ NEW BOOKING ENQUIRY*%0A" + 
+        var message = "*✈️ HAMZA TRAVELS - NEW ENQUIRY*%0A" + 
                       "----------------------------%0A" +
                       "*Airline:* " + airline + "%0A" +
-                      "*Passenger:* " + name + "%0A" +
-                      "*Route:* " + from + " to " + to + "%0A" + 
+                      "*Name:* " + name + "%0A" +
+                      "*Route:* " + from + " ➔ " + to + "%0A" + 
                       "*Date:* " + date + "%0A" +
                       "*Budget:* ₹" + budget + "%0A" +
                       "----------------------------%0A" +
-                      "Please confirm ticket availability.";
+                      "Bhai, availability check karke batana.";
 
         window.open("https://wa.me/" + phoneNumber + "?text=" + message, '_blank');
     }
@@ -114,4 +148,3 @@
 
 </body>
 </html>
-
