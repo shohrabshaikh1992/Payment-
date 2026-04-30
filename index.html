@@ -3,77 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza Travels - Language Support</title>
+    <title>Hamza Travels - Official</title>
     <style>
-        :root { --primary: #1a73e8; --secondary: #25D366; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .app-card { max-width: 480px; background: white; margin: 10px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        :root { --primary: #1a73e8; --secondary: #25D366; --bg: #f4f7f6; }
+        body { font-family: 'Arial', sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        .app-card { max-width: 400px; background: white; margin: 10px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 1px solid #ddd; }
         
-        /* Language Bar */
-        .lang-bar { display: flex; justify-content: center; gap: 10px; padding: 10px; background: #e8f0fe; border-bottom: 1px solid #ddd; }
-        .lang-btn { padding: 5px 15px; border: 1px solid var(--primary); border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: var(--primary); font-weight: bold; transition: 0.3s; }
+        /* Language Buttons */
+        .lang-bar { display: flex; justify-content: center; gap: 10px; padding: 15px; background: #fff; border-bottom: 1px solid #eee; }
+        .lang-btn { padding: 8px 20px; border: 2px solid var(--primary); border-radius: 25px; font-size: 14px; cursor: pointer; background: #fff; color: var(--primary); font-weight: bold; }
         .lang-btn.active { background: var(--primary); color: white; }
 
         .header { background: var(--primary); padding: 20px; text-align: center; color: white; }
-        .header h2 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .header h2 { margin: 0; font-size: 22px; }
 
         .form-body { padding: 20px; }
-        h3 { font-size: 16px; color: var(--primary); margin-bottom: 15px; text-align: center; }
+        h3 { font-size: 15px; color: #444; margin-bottom: 20px; text-align: center; font-weight: bold; }
 
-        /* Airline Grid */
-        .airline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+        /* Airline Grid (Special Logos) */
+        .airline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
         .airline-item { position: relative; text-align: center; }
         .airline-item input { position: absolute; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
         .airline-label { 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 10px 5px; border: 1.5px solid #eee; border-radius: 12px; cursor: pointer; transition: 0.3s; height: 90px; background: #fff;
+            padding: 10px 2px; border: 1.5px solid #eee; border-radius: 12px; height: 90px; background: #fff; transition: 0.3s;
         }
-        .airline-label img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px; }
-        .airline-label span { font-size: 9px; font-weight: bold; color: #555; }
+        .airline-label img { width: 45px; height: 45px; object-fit: contain; margin-bottom: 8px; }
+        .airline-label span { font-size: 10px; font-weight: bold; color: #333; }
         
-        .airline-item input:checked + .airline-label { border-color: var(--primary); background: #e8f0fe; }
-        .airline-item input:checked + .airline-label::after { content: '✓'; position: absolute; bottom: 5px; right: 5px; background: var(--primary); color: white; border-radius: 50%; width: 15px; height: 15px; font-size: 10px; line-height: 15px; text-align: center; }
+        /* Selection Blue Box & Checkmark */
+        .airline-item input:checked + .airline-label { border-color: var(--primary); background: #f0f7ff; border-width: 2px; }
+        .airline-item input:checked + .airline-label::after { content: '✓'; position: absolute; top: 5px; right: 5px; background: var(--primary); color: white; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; line-height: 16px; text-align: center; font-weight: bold; }
 
         .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
         .field { flex: 1; }
-        label { display: block; font-size: 12px; font-weight: 600; color: #444; margin-bottom: 5px; }
-        input { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+        label { display: block; font-size: 13px; font-weight: bold; color: #555; margin-bottom: 6px; }
+        input { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; outline: none; }
+        input:focus { border-color: var(--primary); }
 
-        .btn-wa { display: block; width: 100%; border: none; background: var(--secondary); color: white; text-align: center; padding: 16px; border-radius: 15px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; text-decoration: none; }
-        .btn-pay { display: block; background: #fff; color: var(--primary); text-align: center; padding: 14px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 10px; border: 2px solid var(--primary); }
+        .btn-wa { display: block; width: 100%; border: none; background: var(--secondary); color: white; text-align: center; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; text-decoration: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
+        .btn-pay { display: block; background: #fff; color: var(--primary); text-align: center; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 14px; margin-top: 12px; border: 2px solid var(--primary); cursor: pointer; width: 100%; }
+        
+        #qrArea { display: none; text-align: center; padding: 20px; background: #f9f9f9; border-radius: 15px; margin-top: 15px; }
+        #qrArea img { width: 200px; border: 5px solid white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
+<div class="app-card">
+    <div class="lang-bar">
+        <div class="lang-btn active" onclick="setLang('en', this)">English</div>
+        <div class="lang-btn" onclick="setLang('hi', this)">हिन्दी</div>
+    </div>
+
+    <div class="header">
+        <h2 id="headTitle">✈️ HAMZA TRAVELS</h2>
+    </div>
+
+    <div class="form-body">
+        <h3 id="selectTitle">Choose Your Airline</h3>
+        
         <div class="airline-grid">
             <div class="airline-item">
                 <input type="radio" name="airline" value="Air India" id="ai" checked>
                 <label class="airline-label" for="ai">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Air_India_Logo.svg" alt="AI">
+                    <img src="https://img.icons8.com/color/96/air-india.png" alt="Air India">
                     <span>Air India</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="Saudi Airlines" id="sa">
                 <label class="airline-label" for="sa">
-                    <img src="https://www.saudia.com/content/dam/saudia/Global/Images/Logos/saudia-logo-gold.svg" alt="SA">
+                    <img src="https://img.icons8.com/color/96/saudi-arabia-flag.png" alt="Saudi Air">
                     <span>Saudi Air</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="IndiGo" id="ig">
                 <label class="airline-label" for="ig">
-                    <img src="https://www.goindigo.in/content/dam/indigov2/6e-website/header/indigo-logo.png" alt="IG">
+                    <img src="https://img.icons8.com/color/96/airplane-take-off.png" alt="IndiGo">
                     <span>IndiGo</span>
                 </label>
             </div>
             <div class="airline-item">
                 <input type="radio" name="airline" value="Oman Air" id="oa">
                 <label class="airline-label" for="oa">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Oman_Air_logo.svg/1024px-Oman_Air_logo.svg.png" alt="OA">
+                    <img src="https://img.icons8.com/color/96/oman-flag.png" alt="Oman Air">
                     <span>Oman Air</span>
                 </label>
             </div>
         </div>
-    
-    
+
+        <div class="input-row">
+            <div class="field"><label id="lblFrom">From (Kahan Se)</label><input type="text" id="from" placeholder="City"></div>
+            <div class="field"><label id="lblTo">To (Kahan Tak)</label><input type="text" id="to" placeholder="City"></div>
+        </div>
+
+        <div class="input-row">
+            <div class="field"><label id="lblDate">Date</label><input type="date" id="date"></div>
+            <div class="field"><label id="lblBudget">Budget</label><input type="number" id="budget" placeholder="₹"></div>
+        </div>
+
+        <div class="field"><label id="lblName">Passenger Name</label><input type="text" id="name" placeholder="Full Name"></div>
+
+        <button onclick="sendWhatsApp()" class="btn-wa" id="btnWa">💬 Send Inquiry on WhatsApp</button>
+        <button onclick="document.getElementById('qrArea').style.display='block'" class="btn-pay" id="btnPay">💳 View Payment QR</button>
+
+        <div id="qrArea">
+            <p style="font-weight:bold; font-size:14px; margin-bottom:10px;">Pay & Send Screenshot</p>
+            <img src="https://raw.githubusercontent.com/shohrabshaikh1992/Payment-/main/1000095904.jpg" alt="QR">
+        </div>
+    </div>
+</div>
+
+<script>
+    function setLang(lang, btn) {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const t = {
+            en: { head: "✈️ HAMZA TRAVELS", select: "Choose Your Airline", from: "From (Kahan Se)", to: "To (Kahan Tak)", date: "Date", budget: "Budget", name: "Passenger Name", wa: "💬 Send Inquiry on WhatsApp", pay: "💳 View Payment QR" },
+            hi: { head: "✈️ हमज़ा ट्रैवल्स", select: "अपनी एयरलाइन चुनें", from: "कहाँ से", to: "कहाँ तक", date: "तारीख", budget: "बजट", name: "यात्री का नाम", wa: "💬 व्हाट्सएप पर भेजें", pay: "💳 QR कोड देखें" }
+        };
+        document.getElementById('headTitle').innerText = t[lang].head;
+        document.getElementById('selectTitle').innerText = t[lang].select;
+        document.getElementById('lblFrom').innerText = t[lang].from;
+        document.getElementById('lblTo').innerText = t[lang].to;
+        document.getElementById('lblDate').innerText = t[lang].date;
+        document.getElementById('lblBudget').innerText = t[lang].budget;
+        document.getElementById('lblName').innerText = t[lang].name;
+        document.getElementById('btnWa').innerText = t[lang].wa;
+        document.getElementById('btnPay').innerText = t[lang].pay;
+    }
+
+    function sendWhatsApp() {
+        var air = document.querySelector('input[name="airline"]:checked').value;
+        var f = document.getElementById('from').value;
+        var t = document.getElementById('to').value;
+        var d = document.getElementById('date').value;
+        var b = document.getElementById('budget').value;
+        var n = document.getElementById('name').value;
+        if(!f || !t || !n) { alert("Please fill all details"); return; }
+        var msg = "*✈️ HAMZA TRAVELS ENQUIRY*%0A*Airline:* "+air+"%0A*Name:* "+n+"%0A*Route:* "+f+" to "+t+"%0A*Date:* "+d+"%0A*Budget:* ₹"+b;
+        window.open("https://wa.me/919519266964?text=" + msg, '_blank');
+    }
+</script>
+</body>
+</html>
